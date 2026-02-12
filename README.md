@@ -1,8 +1,8 @@
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![CrewAI](https://img.shields.io/badge/CrewAI-Agents-green)
 ![Architecture](https://img.shields.io/badge/Pattern-Crew-orange)
-#Agentic Stock Analyzer — CrewAI (Crew Architecture)
-##Overview
+# Agentic Stock Analyzer — CrewAI (Crew Architecture)
+## Overview
 
 This project implements a multi-agent stock analysis system using CrewAI Crews.
 
@@ -60,7 +60,7 @@ src/crewsdem/
 ├── crew.py
 └── main.py
 
-##How It Works
+## How It Works
 
 1.Agents are defined in agents.yaml
 
@@ -89,7 +89,7 @@ python -m crewsdem.main --ticker AAPL
 
 This repo reflects real-world agent engineering challenges rather than a toy example.
 
-##Crew vs Flow
+## Crew vs Flow
 
 This implementation uses a Crew architecture, meaning:
 
@@ -103,7 +103,7 @@ This implementation uses a Crew architecture, meaning:
 
 A Flow-based version of this project demonstrates deterministic pipeline orchestration for comparison.
 
-##Future Extensions
+## Future Extensions
 
 1.Replace mock tools with real market APIs
 
@@ -115,6 +115,6 @@ A Flow-based version of this project demonstrates deterministic pipeline orchest
 
 5.Deploy as CLI or API service
 
-##Author
+## Author
 
 Built as part of a broader exploration of agentic orchestration strategies across CrewAI, LangGraph, and MCP.
