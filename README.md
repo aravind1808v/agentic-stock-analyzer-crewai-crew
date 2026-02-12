@@ -1,8 +1,8 @@
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![CrewAI](https://img.shields.io/badge/CrewAI-Agents-green)
 ![Architecture](https://img.shields.io/badge/Pattern-Crew-orange)
-Agentic Stock Analyzer — CrewAI (Crew Architecture)
-Overview
+#Agentic Stock Analyzer — CrewAI (Crew Architecture)
+##Overview
 
 This project implements a multi-agent stock analysis system using CrewAI Crews.
 
@@ -10,47 +10,47 @@ Given a stock ticker (e.g., AAPL), the system coordinates multiple specialized a
 
 The purpose of this repository is to demonstrate:
 
-Role-based agent orchestration
+1.Role-based agent orchestration
 
-Scoped tool access per agent
+2.Scoped tool access per agent
 
-Declarative YAML configuration
+3.Declarative YAML configuration
 
-Context-driven task chaining
+4.Context-driven task chaining
 
-Structured decision output
+5.Structured decision output
 
 This is the Crew-based implementation of the stock analyzer.
 A Flow-based implementation will be provided separately for architectural comparison.
 
-Architecture
+##Architecture
 
 The system consists of four agents:
 
 1️⃣ Market Agent
 
-Calls price history tool
+-Calls price history tool
 
-Computes technical indicators (SMA 20 / 50 / 200)
+-Computes technical indicators (SMA 20 / 50 / 200)
 
 2️⃣ Fundamentals Agent
 
-Analyzes revenue growth, margins, leverage
+-Analyzes revenue growth, margins, leverage
 
-Evaluates financial quality metrics
+-Evaluates financial quality metrics
 
 3️⃣ News Agent
 
-Retrieves recent headlines
+-Retrieves recent headlines
 
-Assesses sentiment
+-Assesses sentiment
 
 4️⃣ Decision Agent
 
-Synthesizes prior agent outputs
+-Synthesizes prior agent outputs
 
-Produces structured investment recommendation
-Repo Structure
+-Produces structured investment recommendation
+##Repo Structure
 src/crewsdem/
 ├── config/
 │   ├── agents.yaml
@@ -60,17 +60,17 @@ src/crewsdem/
 ├── crew.py
 └── main.py
 
-How It Works
+##How It Works
 
-Agents are defined in agents.yaml
+1.Agents are defined in agents.yaml
 
-Tasks are defined in tasks.yaml
+2.Tasks are defined in tasks.yaml
 
-Each agent has scoped tools
+3.Each agent has scoped tools
 
-Tasks can depend on outputs of prior tasks
+4.Tasks can depend on outputs of prior tasks
 
-Final decision agent synthesizes results
+5.Final decision agent synthesizes results
 
 Tools are implemented as BaseTool subclasses to ensure compatibility with Pydantic v2 and CrewAI validation requirements.
 
@@ -86,48 +86,35 @@ pip install crewai pyyaml
 export PYTHONPATH="$(pwd)/src"
 python -m crewsdem.main --ticker AAPL
 
-Key Learnings
-
-During development, we encountered and resolved:
-
-Python interpreter version mismatches
-
-src/ layout packaging issues
-
-CrewAI tool validation errors
-
-Pydantic v2 strict schema enforcement
-
-YAML templating conflicts with JSON examples
 
 This repo reflects real-world agent engineering challenges rather than a toy example.
 
-Crew vs Flow
+##Crew vs Flow
 
 This implementation uses a Crew architecture, meaning:
 
-Agents operate with role specialization
+1.Agents operate with role specialization
 
-Tools are scoped per agent
+2.Tools are scoped per agent
 
-Reasoning emerges from agent collaboration
+3.Reasoning emerges from agent collaboration
 
-Orchestration is dynamic
+4.Orchestration is dynamic
 
 A Flow-based version of this project demonstrates deterministic pipeline orchestration for comparison.
 
-Future Extensions
+##Future Extensions
 
-Replace mock tools with real market APIs
+1.Replace mock tools with real market APIs
 
-Introduce MCP-based tool server
+2.Introduce MCP-based tool server
 
-Add JSON schema validation for final output
+3.Add JSON schema validation for final output
 
-Add confidence scoring logic
+4.Add confidence scoring logic
 
-Deploy as CLI or API service
+5.Deploy as CLI or API service
 
-Author
+##Author
 
 Built as part of a broader exploration of agentic orchestration strategies across CrewAI, LangGraph, and MCP.
