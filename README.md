@@ -1,54 +1,133 @@
-# Crewsdem Crew
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![CrewAI](https://img.shields.io/badge/CrewAI-Agents-green)
+![Architecture](https://img.shields.io/badge/Pattern-Crew-orange)
+Agentic Stock Analyzer — CrewAI (Crew Architecture)
+Overview
 
-Welcome to the Crewsdem Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+This project implements a multi-agent stock analysis system using CrewAI Crews.
 
-## Installation
+Given a stock ticker (e.g., AAPL), the system coordinates multiple specialized agents to produce a structured Buy / Hold / Sell recommendation.
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+The purpose of this repository is to demonstrate:
 
-First, if you haven't already, install uv:
+Role-based agent orchestration
 
-```bash
-pip install uv
-```
+Scoped tool access per agent
 
-Next, navigate to your project directory and install the dependencies:
+Declarative YAML configuration
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
+Context-driven task chaining
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+Structured decision output
 
-- Modify `src/crewsdem/config/agents.yaml` to define your agents
-- Modify `src/crewsdem/config/tasks.yaml` to define your tasks
-- Modify `src/crewsdem/crew.py` to add your own logic, tools and specific args
-- Modify `src/crewsdem/main.py` to add custom inputs for your agents and tasks
+This is the Crew-based implementation of the stock analyzer.
+A Flow-based implementation will be provided separately for architectural comparison.
 
-## Running the Project
+Architecture
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+The system consists of four agents:
 
-```bash
-$ crewai run
-```
+1️⃣ Market Agent
 
-This command initializes the crewsdem Crew, assembling the agents and assigning them tasks as defined in your configuration.
+Calls price history tool
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+Computes technical indicators (SMA 20 / 50 / 200)
 
-## Understanding Your Crew
+2️⃣ Fundamentals Agent
 
-The crewsdem Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+Analyzes revenue growth, margins, leverage
 
-## Support
+Evaluates financial quality metrics
 
-For support, questions, or feedback regarding the Crewsdem Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+3️⃣ News Agent
 
-Let's create wonders together with the power and simplicity of crewAI.
+Retrieves recent headlines
+
+Assesses sentiment
+
+4️⃣ Decision Agent
+
+Synthesizes prior agent outputs
+
+Produces structured investment recommendation
+Repo Structure
+src/crewsdem/
+├── config/
+│   ├── agents.yaml
+│   └── tasks.yaml
+├── tools/
+│   └── stock_picker.py
+├── crew.py
+└── main.py
+
+How It Works
+
+Agents are defined in agents.yaml
+
+Tasks are defined in tasks.yaml
+
+Each agent has scoped tools
+
+Tasks can depend on outputs of prior tasks
+
+Final decision agent synthesizes results
+
+Tools are implemented as BaseTool subclasses to ensure compatibility with Pydantic v2 and CrewAI validation requirements.
+
+Installation
+1️⃣ Create Virtual Environment
+uv venv --python 3.12
+source .venv/bin/activate
+
+2️⃣ Install Dependencies
+pip install crewai pyyaml
+
+3️⃣ Run the System
+export PYTHONPATH="$(pwd)/src"
+python -m crewsdem.main --ticker AAPL
+
+Key Learnings
+
+During development, we encountered and resolved:
+
+Python interpreter version mismatches
+
+src/ layout packaging issues
+
+CrewAI tool validation errors
+
+Pydantic v2 strict schema enforcement
+
+YAML templating conflicts with JSON examples
+
+This repo reflects real-world agent engineering challenges rather than a toy example.
+
+Crew vs Flow
+
+This implementation uses a Crew architecture, meaning:
+
+Agents operate with role specialization
+
+Tools are scoped per agent
+
+Reasoning emerges from agent collaboration
+
+Orchestration is dynamic
+
+A Flow-based version of this project demonstrates deterministic pipeline orchestration for comparison.
+
+Future Extensions
+
+Replace mock tools with real market APIs
+
+Introduce MCP-based tool server
+
+Add JSON schema validation for final output
+
+Add confidence scoring logic
+
+Deploy as CLI or API service
+
+Author
+
+Built as part of a broader exploration of agentic orchestration strategies across CrewAI, LangGraph, and MCP.
