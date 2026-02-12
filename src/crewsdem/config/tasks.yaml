@@ -1,0 +1,35 @@
+market_task:
+  description: >
+    For {ticker}, call tools to fetch price history and compute SMA20/SMA50/SMA200.
+    Return JSON with last_close, SMAs, and a short trend note.
+  expected_output: >
+    JSON market summary.
+  agent: market_agent
+
+fundamentals_task:
+  description: >
+    For {ticker}, call financials tool and summarize strengths and risks.
+    Return JSON with key metrics + takeaways + risks.
+  expected_output: >
+    JSON fundamentals summary.
+  agent: fundamentals_agent
+
+news_task:
+  description: >
+    For {ticker}, call news tool and summarize sentiment and catalysts.
+    Return JSON with sentiment + catalysts + risks.
+  expected_output: >
+    JSON news summary.
+  agent: news_agent
+
+decision_task:
+  description: >
+    Combine prior task outputs for {ticker}. Provide final JSON:
+    {rating, confidence_0_100, horizon, reasons[3-6], triggers[3-6]}.
+  expected_output: >
+    Final recommendation JSON.
+  agent: decision_agent
+  context:
+    - market_task
+    - fundamentals_task
+    - news_task
